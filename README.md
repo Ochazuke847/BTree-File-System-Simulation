@@ -1,8 +1,8 @@
 # B-Tree-File-System-Simulation
 ### Members:
 - Le Dang Thanh Binh - 20233892
-- Nguyen Huy Dat - 20233
-- Nguyen Viet Dung - 20233
+- Nguyen Huy Dat - 20233894
+- Nguyen Viet Dung - 20224360
 
 ## Introduction
 The following project is about building a simple File Explorer Simulation using B-Tree. The programm will allow the user to create, delete, move, display and browse through file / folder in a simulated File Explorer.
