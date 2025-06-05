@@ -1,14 +1,4 @@
 folder,Binh,
-folder,Hai,
-folder,Lop_chieu_thu_6,Hai
-folder,Nhom_2,Hai/Lop_chieu_thu_6
-folder,Nhom_3,Hai/Lop_chieu_thu_6
-folder,Nhom_4,Hai/Lop_chieu_thu_6
-folder,Nhom_5,Hai/Lop_chieu_thu_6
-folder,Nhom_6,Hai/Lop_chieu_thu_6
-folder,Nhom_7,Hai/Lop_chieu_thu_6
-folder,Nhom_8,Hai/Lop_chieu_thu_6
-folder,Nhom_9,Hai/Lop_chieu_thu_6
 folder,Hololive,
 folder,Advent,Hololive
 folder,Bijou,Hololive/Advent
@@ -36,5 +26,6 @@ folder,Nimi,Indie
 folder,SamekoSaba,Indie
 folder,Chumbuds,Indie/SamekoSaba
 folder,Shachimu,Indie
-folder,Nhom_1,
+folder,Nan,
+folder,Clair_Obscur,Nan
 folder,Thuy,

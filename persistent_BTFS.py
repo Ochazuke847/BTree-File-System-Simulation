@@ -176,18 +176,18 @@ class FileSystem:
            return '/'.join(path)
         return 'root'
     
-    def _split_path(path =[]):
+    def _split_path(self, path =[]):
         if path:
             return path.split("/")
         else:
             return []
         
     def _find_node(self, path):
-        current_node_in_fs = self.tree.root.keys[0][1]
+        current_node = self.tree.root.keys[0][1]
         if not path:
-            return current_node_in_fs
+            return current_node
 
-        current_btree_node = current_node_in_fs.children.root
+        current_btree_node = current_node.children.root
         node = None
         for segment in path:
             found = False
