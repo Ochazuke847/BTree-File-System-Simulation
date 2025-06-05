@@ -17,7 +17,7 @@ class FileExplorer:
 
     # Insert a key
     def insert(self, k):                            # send in the tuple k (k[0] is the key, k[1] is the address that store the key)
-        root = self.root                            # root node reference
+        root = self.root                             # root node reference
         if len(root.keys) == (2 * self.t) - 1:      # in case of the root is full
             temp = BTreeNode()                      # create new node
             self.root = temp                        # Set the new node as new root
@@ -175,7 +175,13 @@ class FileSystem:
         if path:
            return '/'.join(path)
         return 'root'
-
+    
+    def _split_path(path =[]):
+        if path:
+            return path.split("/")
+        else:
+            return []
+        
     def _find_node(self, path):
         current_node_in_fs = self.tree.root.keys[0][1]
         if not path:
@@ -453,7 +459,7 @@ class FileSystem:
                 self._get_flat_representation(fs_node.children.root, full_path, flat_list)
 
 
-    def save_state(self, filename='filesystem_state.txt'):
+    def save_state(self, filename='Data_set.txt'):
 
         flat_list = []
         root_fs_node = self.tree.root.keys[0][1]
@@ -469,12 +475,10 @@ class FileSystem:
         print(f" File system state saved to '{filename}'")
 
     @staticmethod
-    def load_state(filename='filesystem_state.txt', t_value=6):
+    def load_state(filename='Data_set.txt', t_value=6):
 
         if os.path.exists(filename):
-            fs = FileSystem(t=t_value) # Create a new, empty FileSystem instance
-            # We need to temporarily store nodes by their full path to ensure parents exist before children
-            # This helps in reconstructing the tree in the correct order.
+            fs = FileSystem(t_value) 
             entries_to_process = []
             with open(filename, 'r') as f:
                 for line in f:
@@ -499,6 +503,9 @@ class FileSystem:
         else:
             print(f" No saved file system state found at '{filename}'. Creating a new one.")
             return None
+        
+
+        
 
     def menu(self):
         print("="*45)
@@ -526,28 +533,28 @@ class FileSystem:
             if choice == "A":
                 folder_name = input("[INPUT] Folder name: ").strip()
                 path = input("[INPUT] Path (e.g., projects/python) [leave empty for root]: ").strip()
-                path_list = path.split("/") if path else []
+                path_list = self._split_path(path)
                 self.create_folder(folder_name, path_list)
                 print("\n")
 
             elif choice == "B":
                 file_name = input("[INPUT] File name: ").strip()
                 path = input("[INPUT] Path: ").strip()
-                path_list = path.split("/") if path else []
+                path_list = self._split_path(path)
                 self.create_file(file_name, path_list)
                 print("\n")
 
             elif choice == "C":
                 folder_name = input("[INPUT] Folder name to delete: ").strip()
                 path = input("[INPUT] Parent path: ").strip()
-                path_list = path.split("/") if path else []
+                path_list = self._split_path(path)
                 self.delete_folder(folder_name, path_list)
                 print("\n")
 
             elif choice == "D":
                 file_name = input("[INPUT] File name to delete: ").strip()
                 path = input("[INPUT] Parent path: ").strip()
-                path_list = path.split("/") if path else []
+                path_list = self._split_path(path)
                 self.delete_file(file_name, path_list)
                 print("\n")
 
@@ -555,7 +562,7 @@ class FileSystem:
                 old_name = input("[INPUT] Old folder name: ").strip()
                 new_name = input("[INPUT] New folder name: ").strip()
                 path = input("[INPUT] Parent path: ").strip()
-                path_list = path.split("/") if path else []
+                path_list = self._split_path(path)
                 self.rename_node(old_name, new_name, path_list)
                 print("\n")
 
@@ -563,7 +570,7 @@ class FileSystem:
                 old_name = input("[INPUT] Old file name: ").strip()
                 new_name = input("[INPUT] New file name: ").strip()
                 path = input("[INPUT] Parent path: ").strip()
-                path_list = path.split("/") if path else []
+                path_list = self._split_path(path)
                 self.rename_node(old_name, new_name, path_list)
                 print("\n")
 
@@ -571,8 +578,8 @@ class FileSystem:
                 folder_name = input("[INPUT] Folder name to move: ").strip()
                 source_path = input("[INPUT] Source path (ex: projects/python) [leave empty for root]: ").strip()
                 dest_path = input("[INPUT] Destination path (ex: documents) [leave empty for root]: ").strip()
-                source_path_list = source_path.split("/") if source_path else []
-                dest_path_list = dest_path.split("/") if dest_path else []
+                source_path_list = self._split_path(source_path)
+                dest_path_list = self._split_path(dest_path)
                 self.move_folder(folder_name, source_path_list, dest_path_list)
                 print("\n")
 
@@ -580,8 +587,8 @@ class FileSystem:
                 file_name = input("[INPUT] Enter file name to move: ").strip()
                 source_path = input("[INPUT]  Enter source path (ex: projects/python) [leave empty for root]: ").strip()
                 dest_path = input("[INPUT] Enter destination path (ex: documents) [leave empty for root]: ").strip()
-                source_path_list = source_path.split("/") if source_path else []
-                dest_path_list = dest_path.split("/") if dest_path else []
+                source_path_list = self._split_path(source_path)
+                dest_path_list = self._split_path(dest_path)
                 self.move_file(file_name, source_path_list, dest_path_list)
                 print("\n")
 
@@ -602,7 +609,7 @@ class FileSystem:
             elif choice == "L":
                 Save_state = input("Do you want to save the File System state [Y/N]: ")
                 if Save_state[:1] == "y" or Save_state[:1] == "Y":
-                    self.save_state(FILE_SYSTEM_STATE_FILE) # Save state on exit
+                    self.save_state(FILE) # Save state on exit
                 print("\n ...Exiting the file system")
 
                 break
@@ -616,14 +623,13 @@ class FileSystem:
             print(end="")
 
 
-FILE_SYSTEM_STATE_FILE = 'filesystem_state.txt'
-DEFAULT_B_TREE_DEGREE = 6 # t value for B-tree
+FILE = 'Data_set.txt'
+DEFAULT_B_TREE_DEGREE = 6
+fs = None
 
 A = input("Do you want to load save [Y/N]:")
 if A[:1] == "Y" or A[:1] == "y":
-    fs = FileSystem.load_state(FILE_SYSTEM_STATE_FILE)
-else:
-  fs = None
+    fs = FileSystem.load_state(FILE)
 
 if fs is None:
     fs = FileSystem(t=DEFAULT_B_TREE_DEGREE)

@@ -5,14 +5,16 @@
 - Nguyen Viet Dung - 20224360
 
 ## Introduction
-The following project is about building a simple File Explorer Simulation using B-Tree. The programm will allow the user to create, delete, move, display and browse through file / folder in a simulated File Explorer.
+The following project is about building a simple File Explorer Simulation using B-Tree. 
+The programm will allow the user to create, delete, move, display and browse through file / folder in a simulated File Explorer.
+When the program is terminated, the user can choose to save the simulated file and folder. 
 
 ## Design of the file System
 Program used - Python\
 Used data structures, algorithm - B-Tree, Depth-first search\
 
 ## Implementation - Algorithms of the System
-Mainly there are 11 functions:
+Mainly there are 6 functions:
 1. Create file/folders
 2. Delete file/folders
 3. Search file/folders
@@ -59,8 +61,15 @@ Mainly there are 11 functions:
 
 ## Instructions to run program
 
-1.**Install Compiler**
-Make sure you have necessary IDE and compiler to run the program
+1. **Install Compiler**
+Make sure you have Python or the neccessary IDE install
+
+2. **Compile the program
+Run the following command to compile the program
+
+      Python persistent_BTFS.py
 
 ## Video demo
+
+
  
